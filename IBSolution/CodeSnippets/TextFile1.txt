@@ -1,0 +1,159 @@
+﻿
+
+/*** excel  ***/ 
+
+
+
+        public List<string> getinList(int Row)
+        {
+            Excel.Range rng = xlRange.Cells[Row];
+            object[,] cellValues = (object[,])rng.Value2;
+            List<string> lst = cellValues.Cast<object>().ToList().ConvertAll(x => Convert.ToString(x));
+            return lst;
+        }
+
+
+        /*
+         * 
+         * Returns a string of the value in the next column
+         **/
+        public String GetNextColumnValue()
+        {
+            
+            Col++;
+            return   xlRange.Cells[Row, Col].Value2 != null ? xlRange.Cells[Row, Col].Value2.ToString() : "";
+
+        }
+
+        /*
+         * gets the value for a specific cell addressed by row / column 
+         * 
+         **/
+        public String GetCellValue(int inRow,int inCol)
+        {
+            return xlRange.Cells[inRow, inCol].Value2 != null ? xlRange.Cells[inRow, inCol].Value2.ToString() : "";
+        }
+
+        /*
+         * returns the excel range created in case you want  to use the range yourself  :Madman:
+         * */
+        public Excel.Range GetRange()
+        {
+            return xlRange;
+        }
+
+        /*
+         *  gets the limit row of the file 
+         * */
+        public int GetRowLimit()
+        {
+            return this.LimitRow;
+        }
+
+
+        /* 
+         * gets the limit
+         * */
+        public int GetColumnLimit()
+        {
+            return this.LimitCol;
+        }
+
+        public void Close()
+        {
+            // thinking if should wait or not
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            //rule of thumb for releasing com objects:
+            //  never use two dots, all COM objects must be referenced and released individually
+            //  ex: [somthing].[something].[something] is bad
+
+            //release com objects to fully kill excel process from running in the background
+            Marshal.ReleaseComObject(xlRange);
+            Marshal.ReleaseComObject(xlWorksheet);
+
+            //close and release
+            xlWorkbook.Close();
+            Marshal.ReleaseComObject(xlWorkbook);
+
+            //quit and release
+            xlApp.Quit();
+            Marshal.ReleaseComObject(xlApp);
+
+
+
+        }
+      
+        /*
+         * sets the value of the row , for when we want to navigate the row 
+         **/
+        public void setRow(int TosetRow) => Row = TosetRow;
+
+		
+        public  InExcel(String FilePath)
+        {
+            //TODO: catch this  System.Runtime.InteropServices.COMException
+            try
+            {                
+            
+                this.xlApp = new Excel.Application();
+                this.xlWorkbook = xlApp.Workbooks.Open(@FilePath);
+                this.xlWorksheet = xlWorkbook.Sheets[1];
+                this.xlRange = xlWorksheet.UsedRange;
+                this.LimitRow = xlRange.Rows.Count;
+                this.LimitCol = xlRange.Columns.Count;
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("File not Found:"+FilePath);
+            }
+            
+    
+
+        }
+
+		/** main multiple cool stuff **/ 
+
+		 /*   
+               while (dr.Read())
+       {
+           for (int i = 0; i < dr.FieldCount; i++)
+           {
+              // Console.Write(dr[i] + " ");
+                       Console.Write(dr.GetValue(0));
+                       Console.Write(dr.GetValue(30));
+
+
+           }
+           //Console.WriteLine();
+                   //Console.ReadLine();
+
+       }
+       */
+            //InExcel excelReader = new InExcel(FileToWork);
+            // List<String> lst = excelReader.getinList(7);
+            //Console.ReadLine();
+            //Console.WriteLine("header");
+
+            /*
+            Console.WriteLine("header");
+;           Console.WriteLine(excelReader.GetCellValue(1,25));
+            Console.WriteLine("raw");
+            Console.WriteLine(excelReader.GetCellValue(2, 25));
+            Console.WriteLine("parsed");
+            Console.WriteLine( DateTime.FromOADate(Double.Parse(excelReader.GetCellValue(2, 25))).ToString("MM/dd/yyyy"));
+            Double test = DateTime.Today.ToOADate()-1;
+            Double test1 = DateTime.Today.ToOADate();
+
+            Console.WriteLine("yesterday:"+test);
+            Console.WriteLine("Today:" + test1);
+
+            Console.WriteLine("Today Date");
+            Console.WriteLine(DateTime.FromOADate(test).ToString("MM/dd/yyyy"));
+            Console.WriteLine("Yesterday Date");
+            Console.WriteLine(DateTime.FromOADate(test1).ToString("MM/dd/yyyy"));
+            excelReader.Close();
+            */
+            
+            

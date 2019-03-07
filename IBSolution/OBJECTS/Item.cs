@@ -11,7 +11,7 @@ namespace IBSolution.OBJECTS
 {
     class Item
     {
-
+        //Comming from CCW-R
         String Product_Number;
         String Product_Description;
         DateTime Last_Date_of_Support;
@@ -104,7 +104,6 @@ namespace IBSolution.OBJECTS
         String Covered = "";
 
         //Loki Specifics
-
         String Config_Alignment;
         Boolean LDOS;
         Boolean LDOS_Config;
@@ -397,12 +396,12 @@ namespace IBSolution.OBJECTS
                 (this.Ship_Date==DateTime.MinValue) ? "" : this.Ship_Date.ToShortDateString(),
                 this.PO_Number,
                 this.SO_Number,
-                this.Product_Bill_to_Name,
                 this.Product_Bill_To_ID,
+                this.Product_Bill_to_Name,
                 this.Product_Ship_to_ID,
                 this.Product_Ship_to_Name,
-                this.End_Customer_ID,
                 this.End_Customer_Name,
+                this.End_Customer_ID,
                 this.End_Customer_Address,
                 this.Installed_At_AddressLine2,
                 this.End_Customer_City,
@@ -453,12 +452,11 @@ namespace IBSolution.OBJECTS
                 "", //5th SL Description
                 "", //5th ProductCoverageStatus
                 "", //5th ProductCoverageStartDate
-                "" //5th ProductCoverageEndDate
+                ""  //5th ProductCoverageEndDate
             };
             toObjectArrayCoverages(bifrost);
             return bifrost;
         }
-
 
     }
 }

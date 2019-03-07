@@ -348,7 +348,7 @@ namespace IBSolution.OBJECTS
                 int y = 0;
                 foreach (Coverage Cover in this.Coverages)
                 {
-                    if (i > Number_of_Coverages) return;
+                    if (i > Number_of_Coverages || i > 5) return;
                     else
                     {
                         Array[43 + y] = Cover.Contract_Number;

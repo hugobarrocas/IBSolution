@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>download.ico</ApplicationIcon>
+    <ApplicationIcon>IBSIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -90,7 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CodeSnippets\TextFile1.txt" />
-    <Content Include="download.ico" />
+    <Content Include="IBSIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

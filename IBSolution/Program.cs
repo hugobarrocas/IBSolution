@@ -20,6 +20,12 @@ namespace IBSolution
 
             string[] tablenames = new string[1];
             tablenames[0] = "WithMajorMinor";
+
+            string[] tablenames3 = new string[3];
+            tablenames3[0] = "WithMajorMinor";
+            tablenames3[1] = "WithMajorMinorReview";
+            tablenames3[2] = "LDOS and Config";
+
             Console.WriteLine("\n  u  " + "\n  o  " + "\n /|-º " + "\n / \\ Starting Program\n");
 
             Console.WriteLine(Version);
@@ -60,7 +66,8 @@ namespace IBSolution
 
             Console.WriteLine("\nExcelWriter Started at " + DateTime.Now);
             Console.WriteLine("\nPlease Wait...");
-            OutExcel excelWriter = new OutExcel(filepath, tablenames, IBSolution.getHopperFormat());
+            //OutExcel excelWriter = new OutExcel(filepath, tablenames, IBSolution.getHopperFormat());
+            OutExcel excelWriter = new OutExcel(filepath, tablenames3, IBSolution.getHopperFormat3());
             Console.WriteLine("\nExcelWriter Ended at " + DateTime.Now);
 
             Console.WriteLine("\nProgram Ended at " + DateTime.Now);

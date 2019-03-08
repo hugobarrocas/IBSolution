@@ -313,6 +313,11 @@ namespace IBSolution.OBJECTS
             return LDOS_Config;
         }
 
+        public Boolean isReview()
+        {
+            return this.Review;
+        }
+
         public void setLDOSConfig()
         {
             this.LDOS_Config = true;

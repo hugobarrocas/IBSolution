@@ -17,7 +17,9 @@ namespace IBSolution.OBJECTS
         Dictionary<string, List<string>> SourceFileitems;
         Dictionary<string, string> SerialtoInstance;
         List<string> NotPresent;
-        DataTable HopperFormat = new HopperFormat().getTable();
+        DataTable WithMajorMinor = new HopperFormat().getTable();
+        DataTable LDOS_Tab = new HopperFormat().getTable();
+        DataTable Review_Tab = new HopperFormat().getTable();
 
         public MidwayStation(DataTableReader dr)
         {
@@ -56,7 +58,8 @@ namespace IBSolution.OBJECTS
             if (Test) print_LDOS();
             if (Test) print_Items();
             if (Test) print_Review();
-            Hopperfy();
+            //Hopperfy();
+            Hopperfy3Tabs();
             Console.WriteLine("\nLoki Processed " + TotalLines + " Items");
         }
 
@@ -276,7 +279,8 @@ namespace IBSolution.OBJECTS
                 foreach (KeyValuePair<string, Item> entry in Asgard)
                 {
                     Object[] Line = entry.Value.toObjectArray();
-                    this.HopperFormat.Rows.Add(Line);
+                    this.WithMajorMinor.Rows.Add(Line);
+                    items++;
                 }
             }
             Console.WriteLine("\nHopperfied");
@@ -285,9 +289,50 @@ namespace IBSolution.OBJECTS
         public DataTable[] getHopperFormat()
         {
             DataTable[] dataTables = new DataTable[]{
-                this.HopperFormat
+                this.WithMajorMinor
             };
             return dataTables;
+        }
+
+        public DataTable[] getHopperFormat3()
+        {
+            DataTable[] dataTables = new DataTable[]{
+                this.WithMajorMinor,
+                this.Review_Tab,
+                this.LDOS_Tab
+            };
+            return dataTables;
+        }
+
+        public void Hopperfy3Tabs()
+        {
+            int WithMajorMinor_Items = 0;
+            int LDOS_Items = 0;
+            int Review_Items = 0;
+            {
+                foreach (KeyValuePair<string, Item> entry in Asgard)
+                {
+                    if (entry.Value.isLDOSConfig())
+                    {
+                        Object[] LDOS_Line = entry.Value.toObjectArray();
+                        this.LDOS_Tab.Rows.Add(LDOS_Line);
+                        LDOS_Items++;
+                    }
+                    else if (entry.Value.isReview())
+                    {
+                        Object[] Review_Line = entry.Value.toObjectArray();
+                        this.LDOS_Tab.Rows.Add(Review_Line);
+                        Review_Items++;
+                    }
+                    else
+                    {
+                        Object[] Line = entry.Value.toObjectArray();
+                        this.WithMajorMinor.Rows.Add(Line);
+                        WithMajorMinor_Items++;
+                    }
+                }
+            }
+            Console.WriteLine("\nHopperfied");
         }
 
     }

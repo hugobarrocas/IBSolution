@@ -8,13 +8,29 @@ using IBSolution.IO.Input;
 using IBSolution.OBJECTS;
 using System.Collections.Generic;
 using IBSolution.IO.Output;
+using System.Windows.Forms;
+using IBSolution.Graph;
+using System.IO;
+
 namespace IBSolution
 {
 
     class Program
     {
+        public static string SourceFilesDir = "";
+        public static string SniffileToWork = "";
+        public static string filepath = "";
+        // needs to be here  for win forms apps to disable comment 
+        [STAThread]
         static void Main(string[] args)
         {
+          
+            // code for graphic mode  to disable comment
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Form beautyfier = new MainForm();
+            Application.Run(beautyfier);
+            //TODO: por proteccção para o caso dos Paths virem vazios 
 
             String Version = "V 0.2";
 
@@ -26,21 +42,35 @@ namespace IBSolution
             tablenames3[1] = "WithMajorMinorReview";
             tablenames3[2] = "LDOS and Config";
 
+            
             Console.WriteLine("\n  u  " + "\n  o  " + "\n /|-º " + "\n / \\ Starting Program\n");
-
+            if((SourceFilesDir=="" ) || (SniffileToWork =="") || (filepath ==""))
+            {
+                Console.WriteLine("Proper Environment was not setup:");
+                Console.WriteLine("Bye Bye!");
+                Console.ReadKey();
+                System.Environment.Exit(1);
+            }
             Console.WriteLine(Version);
             Console.WriteLine("\nLet the Trickery Begin!!!");
             Console.WriteLine("\nStart at " + DateTime.Now);
-            string SourceFilesDir = "";
-            string SniffileToWork = "";
+            Console.WriteLine("Sources to be consolidate from DIR:");
+            Console.WriteLine(SourceFilesDir);
+            Console.WriteLine("Line Details File Going to be used: " + Path.GetFileName(SniffileToWork));
+            Console.WriteLine("target Directory:" );
+              Console.WriteLine(Path.GetDirectoryName(filepath));
+            Console.WriteLine("Final File: "+Path.GetFileName(filepath));
+            Console.ReadKey();
+            //string SourceFilesDir = "";
+            //string SniffileToWork = "";
 
-            Console.WriteLine("\nPlease insert the Filepath for Line details File");
-            SniffileToWork = Console.ReadLine();
+            //Console.WriteLine("\nPlease insert the Filepath for Line details File");
+            //SniffileToWork = Console.ReadLine();
             Console.WriteLine("\nChevron 1 Encoded\n \nPlease insert the Directory path for Source Files");
-            SourceFilesDir = Console.ReadLine();
+            //SourceFilesDir = Console.ReadLine();
 
-            Console.WriteLine("\nChevron 2 Encoded\n \nPlease insert the Filepath for Output File");
-            String filepath = Console.ReadLine();
+            //Console.WriteLine("\nChevron 2 Encoded\n \nPlease insert the Filepath for Output File");
+           // String filepath = Console.ReadLine();
             Console.WriteLine("\nChevron 3 Encoded\n");
             DataTable dt = null;
             DataTableReader dr = null;

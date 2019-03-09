@@ -109,6 +109,7 @@ namespace IBSolution
             Console.WriteLine("\n  u  " + "\n  o  " + "\n /|\\ " + "\n / \\ Please Press Enter to close");
             String bye = Console.ReadLine();
             Process.Start("explorer.exe", Path.GetDirectoryName(filepath));
+            System.Environment.Exit(1);
 
         }
     }

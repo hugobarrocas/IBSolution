@@ -74,7 +74,9 @@ namespace IBSolution.IO.Output
                 //excel.Application.Cells.EntireRow.AutoFit();
                 // Select the first cell in the worksheet.
                 excel.Application.Range["$A$2"].Select();
+                if(i < Tables.Length-1) { 
                 workbook.Sheets.Add(After: workbook.Sheets[workbook.Sheets.Count]);
+                }
             }
 
             // Turn off alerts to prevent asking for 'overwrite existing' and 'save changes' messages.

@@ -11,6 +11,7 @@ using IBSolution.IO.Output;
 using System.Windows.Forms;
 using IBSolution.Graph;
 using System.IO;
+using System.Diagnostics;
 
 namespace IBSolution
 {
@@ -60,6 +61,7 @@ namespace IBSolution
             Console.WriteLine("target Directory:" );
               Console.WriteLine(Path.GetDirectoryName(filepath));
             Console.WriteLine("Final File: "+Path.GetFileName(filepath));
+            Console.WriteLine("press enter to proceed or close to cancel");
             Console.ReadKey();
             //string SourceFilesDir = "";
             //string SniffileToWork = "";
@@ -101,10 +103,12 @@ namespace IBSolution
             Console.WriteLine("\nExcelWriter Ended at " + DateTime.Now);
 
             Console.WriteLine("\nProgram Ended at " + DateTime.Now);
-            Console.WriteLine("\nProgram Done your File has been Stored in " + filepath);
+            Console.WriteLine("\nProgram Done your File has been Stored in ");
+            Console.WriteLine(filepath);
 
             Console.WriteLine("\n  u  " + "\n  o  " + "\n /|\\ " + "\n / \\ Please Press Enter to close");
             String bye = Console.ReadLine();
+            Process.Start("explorer.exe", Path.GetDirectoryName(filepath));
 
         }
     }

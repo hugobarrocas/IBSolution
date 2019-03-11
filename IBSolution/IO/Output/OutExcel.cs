@@ -42,6 +42,7 @@ namespace IBSolution.IO.Output
                 for (var column = 0; column < columns; column++)
                 {
                     data[0, column] = Tables[i].Columns[column].ColumnName;
+
                 }
                 // Insert the provided records.
                 for (var row = 0; row < rows; row++)
@@ -49,6 +50,7 @@ namespace IBSolution.IO.Output
                     for (var column = 0; column < columns; column++)
                     {
                         data[row + 1, column] = Tables[i].Rows[row][column];
+                        
                     }
 
                 }
@@ -56,7 +58,12 @@ namespace IBSolution.IO.Output
                 Range beginWrite = (Range)worksheet.Cells[1, 1];
                 Range endWrite = (Range)worksheet.Cells[rows + 1, columns];
                 Range sheetData = worksheet.Range[beginWrite, endWrite];
+                //formating with majorMinor
+                Range Formater = worksheet.Range[(Range)worksheet.Cells[1,3], (Range)worksheet.Cells[rows + 1, 3]];
+                Formater.Cells.NumberFormat = "@";
+
                 sheetData.Value2 = data;
+
 
                 // Additional row, column and table formatting.
                 worksheet.Select();
@@ -70,13 +77,15 @@ namespace IBSolution.IO.Output
                 //excel.Application.Range["2:2"].Select();
                 // excel.ActiveWindow.FreezePanes = true;
                 //excel.ActiveWindow.DisplayGridlines = false;
-                //excel.Application.Cells.EntireColumn.AutoFit();
-                //excel.Application.Cells.EntireRow.AutoFit();
+                excel.Application.Cells.EntireColumn.AutoFit();
+                excel.Application.Cells.EntireRow.AutoFit();
                 // Select the first cell in the worksheet.
                 excel.Application.Range["$A$2"].Select();
                 if(i < Tables.Length-1) { 
                 workbook.Sheets.Add(After: workbook.Sheets[workbook.Sheets.Count]);
                 }
+                // leave the workbok on first sheet 
+                workbook.Sheets[(Sheetnames[0])].select();
             }
 
             // Turn off alerts to prevent asking for 'overwrite existing' and 'save changes' messages.
@@ -91,7 +100,7 @@ namespace IBSolution.IO.Output
                         Missing.Value, Missing.Value, Missing.Value);
             workbook.Close(false, Type.Missing, Type.Missing);
             //wondering if necessary 
-            //excel.Quit();
+            excel.Quit();
             // Release our resources.
             Marshal.ReleaseComObject(workbook);
             Marshal.ReleaseComObject(workbooks);

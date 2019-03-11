@@ -120,6 +120,16 @@
   <metadata name="tableLayoutPanel1.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Guidelinestextbox.Text" xml:space="preserve">
+    <value>Guidelines 
+1-Source files should be 1 column Header should contain 
+"Serial Number"| "Instance number" | "Instance id"
+2-Line details File sould be Unfiltered and have the header 
+like the original downloaded file with the 6 extra lines 
+and the Sheet should be calle "LineDetails" 
+3-when selecting Source Flles Path select the First one, 
+keep in mind all files from that folde will be taken into consideration </value>
+  </data>
   <metadata name="SelectLineDetailsDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

@@ -54,5 +54,10 @@ namespace IBSolution.Graph
             //IBSolution.Program.SourceFilesDir = SourcesPathBox.Text;
             this.Close();
         }
+
+        private void SelectSourcesDir_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
     }
 }

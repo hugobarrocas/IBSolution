@@ -192,8 +192,9 @@
             // 
             // SelectSourcesDir
             // 
-            this.SelectSourcesDir.FileName = "Select sources File";
+            this.SelectSourcesDir.FileName = "Select First File on Folder";
             this.SelectSourcesDir.Filter = "\"Text|*.txt";
+            this.SelectSourcesDir.FileOk += new System.ComponentModel.CancelEventHandler(this.SelectSourcesDir_FileOk);
             // 
             // MainForm
             // 

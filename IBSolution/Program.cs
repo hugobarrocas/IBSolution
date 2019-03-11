@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using IBSolution.IO.Input;
 using IBSolution.OBJECTS;
-using System.Collections.Generic;
 using IBSolution.IO.Output;
 namespace IBSolution
 {

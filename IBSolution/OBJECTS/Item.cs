@@ -84,6 +84,7 @@ namespace IBSolution.OBJECTS
         String Eligible_for_quoting;
         String Reason_for_ineligibility;
         List<Coverage> Coverages;
+        List<String> Child_Items;
 
         //Hopper Specifics
         String Source_Data_File = "";
@@ -105,12 +106,15 @@ namespace IBSolution.OBJECTS
 
         //Loki Specifics
         String Config_Alignment;
-        Boolean LDOS;
-        Boolean LDOS_Config;
         int Number_of_Coverages = 1;
+
 
         //Error Tracking
         Boolean Review = false;
+        Boolean Review_Config;
+        Boolean LDOS;
+        Boolean LDOS_Config;
+
 
         /*
          *  min value: Date = {1/1/0001 12:00:00 AM}
@@ -218,6 +222,7 @@ namespace IBSolution.OBJECTS
             this.Config_Alignment = check_Config_Alignment();
             this.Configuration_Group = Parent_Instance_Number;
             this.Coverages.Add(Temp);
+            this.Child_Items = new List<string>();
         }
 
         public Boolean check_LDOS()
@@ -267,6 +272,8 @@ namespace IBSolution.OBJECTS
         {
             return this.Last_Date_of_Support;
         }
+
+        
 
         public String getCoveredStatus()
         {
@@ -318,6 +325,11 @@ namespace IBSolution.OBJECTS
             return this.Review;
         }
 
+        public Boolean isReviewConfig()
+        {
+            return this.Review_Config;
+        }
+
         public void setLDOSConfig()
         {
             this.LDOS_Config = true;
@@ -326,6 +338,12 @@ namespace IBSolution.OBJECTS
         public void setReviewStatus()
         {
             this.Review = true;
+            this.Review_Config = true;
+        }
+
+        public void setReviewConfig()
+        {
+            this.Review_Config = true;
         }
 
         public void SetNextCoverage(Coverage Next)
@@ -463,5 +481,14 @@ namespace IBSolution.OBJECTS
             return bifrost;
         }
 
+        public void addChildtoList(string child)
+        {
+            this.Child_Items.Add(child);
+        }
+
+        public List<String> getChildItems()
+        {
+            return this.Child_Items;
+        }
     }
 }

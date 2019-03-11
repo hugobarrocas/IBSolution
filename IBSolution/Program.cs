@@ -67,12 +67,15 @@ namespace IBSolution
 
             //Console.WriteLine("\nPlease insert the Filepath for Line details File");
             //SniffileToWork = Console.ReadLine();
-            Console.WriteLine("\nChevron 1 Encoded\n \nPlease insert the Directory path for Source Files");
+            Console.WriteLine("\nFilepath for Source Files - Accepted\nChevron 1 Encoded\n");
+            //Console.WriteLine("\nChevron 1 Encoded\n \nPlease insert the Directory path for Source Files");
             //SourceFilesDir = Console.ReadLine();
 
+            Console.WriteLine("\nFilepath for Details File - Accepted\nChevron 2 Encoded\n");
             //Console.WriteLine("\nChevron 2 Encoded\n \nPlease insert the Filepath for Output File");
-           // String filepath = Console.ReadLine();
-            Console.WriteLine("\nChevron 3 Encoded\n");
+            //String filepath = Console.ReadLine();
+            Console.WriteLine("\nFilepath for Output File - Accepted\nChevron 3 Encoded\n");
+            //Console.WriteLine("\nChevron 3 Encoded\n");
             DataTable dt = null;
             DataTableReader dr = null;
             Dictionary<string, List<string>> SourceFileitems = null;

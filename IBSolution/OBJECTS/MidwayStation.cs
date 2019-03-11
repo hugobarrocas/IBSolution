@@ -52,8 +52,10 @@ namespace IBSolution.OBJECTS
             if (Test) End = DateTime.Now - Start;
             if (Test) Console.WriteLine("\nLoki Took :" + End);
             if (Test) Console.WriteLine("\nLoki Processed " + TotalLines + " Items");
+            buildConfiguration();
             doSingleSourcing();
             check_Ldos_Configurations();
+            check_Review_Configurations();
             if (Test) print_double_Coverages();
             if (Test) print_LDOS();
             if (Test) print_Items();
@@ -210,7 +212,7 @@ namespace IBSolution.OBJECTS
             this.NotPresent = new List<string>();
             foreach (KeyValuePair<string, List<string>> entry in SourceFileitems)
             {
-                if (entry.Value[0] == "Instance Number")
+                if (entry.Value[0] == "Instance Number" || entry.Value[0] == "Instance ID" || entry.Value[0] == "INSTANCE NUMBER")
                 {
                     foreach (string instance in entry.Value)
                     {
@@ -251,13 +253,70 @@ namespace IBSolution.OBJECTS
             {
                 if (entry.Value.getSourceFile() == "")
                 {
+                    if (entry.Value.getParentInstance() == entry.Value.getInstance())
+                    {
+                        List<String> list = entry.Value.getChildItems();
+                        String Source = "Not Found";
+                        foreach (String instance in list)
+                        {
+                            if (Asgard[instance].getSourceFile() != "") Source = Asgard[instance].getSourceFile();
+                        }
+                        entry.Value.SetSourceDataFile("Parent pulled by Child found in " + Source);
+                        entry.Value.setReviewStatus();
+                    }
+                    else if (Asgard.ContainsKey(entry.Value.getParentInstance()))
+                    {
+                        if (Asgard[entry.Value.getParentInstance()].getSourceFile() != "" && !Asgard[entry.Value.getParentInstance()].getSourceFile().Contains("Parent pulled by Child ")) entry.Value.SetSourceDataFile("Child of Parent found in " + Asgard[entry.Value.getParentInstance()].getSourceFile());
+                        else
+                        {
+                            List<String> list = Asgard[entry.Value.getParentInstance()].getChildItems();
+                            String Source = "Not Found";
+                            foreach (String instance in list)
+                            {
+                                if (Asgard[instance].getSourceFile() != "" && !Asgard[instance].getSourceFile().Contains("Child pulled by Child found in ")) Source = Asgard[instance].getSourceFile();
+                            }
+                            entry.Value.SetSourceDataFile("Child pulled by Child found in " + Source);
+                            entry.Value.setReviewStatus();
+                        }
+                    }
+                    else
+                    {
+
+                        entry.Value.setReviewStatus();
+                        entry.Value.SetSourceDataFile("Parent not found in File");
+                    }
+                }
+
+            }
+        }
+
+        public void buildConfiguration()
+        {
+            foreach (KeyValuePair<string, Item> entry in Asgard)
+            {
+                if (entry.Value.getParentInstance() != entry.Value.getInstance())
+                {
                     if (Asgard.ContainsKey(entry.Value.getParentInstance()))
                     {
-                        entry.Value.SetSourceDataFile("Child of Parent found in " + Asgard[entry.Value.getParentInstance()].getSourceFile());
+                        Asgard[entry.Value.getParentInstance()].addChildtoList(entry.Value.getInstance());
                     }
                     else entry.Value.setReviewStatus();
                 }
+            }
+        }
 
+        public void check_Review_Configurations()
+        {
+            foreach (KeyValuePair<string, Item> entry in Asgard)
+            {
+                if (entry.Value.getParentInstance() == entry.Value.getInstance() && entry.Value.isReviewConfig())
+                {
+                    List<String> list = entry.Value.getChildItems();
+                    foreach (String instance in list)
+                    {
+                        Asgard[instance].setReviewConfig();
+                    }
+                }
             }
         }
 
@@ -318,10 +377,10 @@ namespace IBSolution.OBJECTS
                         this.LDOS_Tab.Rows.Add(LDOS_Line);
                         LDOS_Items++;
                     }
-                    else if (entry.Value.isReview())
+                    else if (entry.Value.isReviewConfig())
                     {
                         Object[] Review_Line = entry.Value.toObjectArray();
-                        this.LDOS_Tab.Rows.Add(Review_Line);
+                        this.Review_Tab.Rows.Add(Review_Line);
                         Review_Items++;
                     }
                     else

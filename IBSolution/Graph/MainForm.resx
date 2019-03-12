@@ -128,7 +128,7 @@
 like the original downloaded file with the 6 extra lines 
 and the Sheet should be calle "LineDetails" 
 3-when selecting Source Flles Path select the First one, 
-keep in mind all files from that folde will be taken into consideration </value>
+keep in mind all files from that folder will be taken into consideration </value>
   </data>
   <metadata name="SelectLineDetailsDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

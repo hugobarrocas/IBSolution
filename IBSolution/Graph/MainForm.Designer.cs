@@ -40,9 +40,9 @@
             this.SnifFilePath = new System.Windows.Forms.Button();
             this.CloseButton = new System.Windows.Forms.Button();
             this.RunButton = new System.Windows.Forms.Button();
+            this.Guidelinestextbox = new System.Windows.Forms.RichTextBox();
             this.SelectLineDetailsDialog = new System.Windows.Forms.OpenFileDialog();
             this.SelectSourcesDir = new System.Windows.Forms.OpenFileDialog();
-            this.Guidelinestextbox = new System.Windows.Forms.RichTextBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -187,17 +187,6 @@
             this.RunButton.UseVisualStyleBackColor = true;
             this.RunButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
-            // SelectLineDetailsDialog
-            // 
-            this.SelectLineDetailsDialog.FileName = "Select File";
-            this.SelectLineDetailsDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm\";*.xlsb;";
-            // 
-            // SelectSourcesDir
-            // 
-            this.SelectSourcesDir.FileName = "Select First File on Folder";
-            this.SelectSourcesDir.Filter = "\"Text|*.txt";
-            this.SelectSourcesDir.FileOk += new System.ComponentModel.CancelEventHandler(this.SelectSourcesDir_FileOk);
-            // 
             // Guidelinestextbox
             // 
             this.Guidelinestextbox.AcceptsTab = true;
@@ -208,6 +197,17 @@
             this.Guidelinestextbox.TabIndex = 100007;
             this.Guidelinestextbox.Text = resources.GetString("Guidelinestextbox.Text");
             this.Guidelinestextbox.TextChanged += new System.EventHandler(this.Guidelinestextbox_TextChanged);
+            // 
+            // SelectLineDetailsDialog
+            // 
+            this.SelectLineDetailsDialog.FileName = "Select File";
+            this.SelectLineDetailsDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm\";*.xlsb;";
+            // 
+            // SelectSourcesDir
+            // 
+            this.SelectSourcesDir.FileName = "Select First File on Folder";
+            this.SelectSourcesDir.Filter = "\"Text|*.txt";
+            this.SelectSourcesDir.FileOk += new System.ComponentModel.CancelEventHandler(this.SelectSourcesDir_FileOk);
             // 
             // MainForm
             // 

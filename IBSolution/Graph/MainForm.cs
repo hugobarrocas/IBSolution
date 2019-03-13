@@ -59,5 +59,10 @@ namespace IBSolution.Graph
         {
 
         }
+
+        private void Guidelinestextbox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

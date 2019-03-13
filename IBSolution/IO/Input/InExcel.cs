@@ -63,7 +63,18 @@ namespace IBSolution.IO.Input
             OleDbConnection con = new OleDbConnection(constring);
             con.Open();
             dtTablesList = con.GetSchema("Tables");
-            sSheetName = dtTablesList.Rows[0]["TABLE_NAME"].ToString();
+            int tablelisttSize = dtTablesList.Rows.Count;
+
+            for ( int j = 0; j <= tablelisttSize; j++)
+            {
+                sSheetName = dtTablesList.Rows[j]["TABLE_NAME"].ToString();
+                if (sSheetName.EndsWith("$"))
+                {
+                    j = tablelisttSize + 1;
+                }
+            }
+
+           
             string sqlquery = "Select * From [" + sSheetName + "A7:CO]";
             dataAdapter = new OleDbDataAdapter(sqlquery, con);
             dataAdapter.Fill(ds);

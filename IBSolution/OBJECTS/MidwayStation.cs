@@ -371,7 +371,7 @@ namespace IBSolution.OBJECTS
             {
                 foreach (KeyValuePair<string, Item> entry in Asgard)
                 {
-                    if (entry.Value.isLDOSConfig())
+                    if (entry.Value.isLDOSConfig()||entry.Value.isLDOS())
                     {
                         Object[] LDOS_Line = entry.Value.toObjectArray();
                         this.LDOS_Tab.Rows.Add(LDOS_Line);

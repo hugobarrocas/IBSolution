@@ -13,7 +13,7 @@ namespace IBSolution.OBJECTS
     {
         DataTableReader dr;
         HashMap<string, Item> Asgard;
-        Boolean Test = false;
+        Boolean Test = true;
         Dictionary<string, List<string>> SourceFileitems;
         Dictionary<string, string> SerialtoInstance;
         List<string> NotPresent;
@@ -56,10 +56,10 @@ namespace IBSolution.OBJECTS
             doSingleSourcing();
             check_Ldos_Configurations();
             check_Review_Configurations();
-            if (Test) print_double_Coverages();
-            if (Test) print_LDOS();
-            if (Test) print_Items();
-            if (Test) print_Review();
+            //if (Test) print_double_Coverages();
+            //if (Test) print_LDOS();
+            //if (Test) print_Items();
+            //if (Test) print_Review();
             //Hopperfy();
             Hopperfy3Tabs();
             Console.WriteLine("\nLoki Processed " + TotalLines + " Items");
@@ -371,7 +371,7 @@ namespace IBSolution.OBJECTS
             {
                 foreach (KeyValuePair<string, Item> entry in Asgard)
                 {
-                    if (entry.Value.isLDOSConfig())
+                    if (entry.Value.isLDOSConfig()||entry.Value.isLDOS())
                     {
                         Object[] LDOS_Line = entry.Value.toObjectArray();
                         this.LDOS_Tab.Rows.Add(LDOS_Line);
